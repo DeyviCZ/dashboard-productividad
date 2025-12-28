@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Dashboard personal de productividad con gestión de tareas y temporizador Pomodoro"
+    />
+    <title>🚀 Dashboard de Productividad</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header-principal">
+      <div class="contenedor-header">
+        <h1>🚀 Dashboard de Productividad</h1>
+        <nav class="navegacion-principal">
+          <button
+            id="btn-modo-oscuro"
+            class="btn-toggle"
+            aria-label="Alternar modo oscuro"
+          >
+            🌙
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="contenido-principal">
+      <section class="estadisticas" aria-labelledby="titulo-estadisticas">
+        <h2 id="titulo-estadisticas">📊 Estadísticas de Hoy</h2>
+        <div class="grid-estadisticas">
+          <article class="tarjeta-estadistica">
+            <h3>Tareas Completadas</h3>
+            <span class="numero-estadistica" id="tareas-completadas">0</span>
+          </article>
+          <article class="tarjeta-estadistica">
+            <h3>Tiempo Enfocado</h3>
+            <span class="numero-estadistica" id="tiempo-enfocado">0m</span>
+          </article>
+          <article class="tarjeta-estadistica">
+            <h3>Racha Actual</h3>
+            <span class="numero-estadistica" id="racha-actual">0</span>
+          </article>
+        </div>
+      </section>
+
+      <div class="grid-principal">
+        <section class="panel-tareas">
+          <header class="panel-header">
+            <h2>✅ Lista de Tareas</h2>
+            <button
+              id="btn-agregar-tarea"
+              class="btn-primario"
+              aria-label="Agregar nueva tarea"
+            >
+              ➕ Agregar
+            </button>
+          </header>
+
+          <div class="filtros-tareas">
+            <button class="filtro-activo" data-filtro="todas">Todas</button>
+            <button data-filtro="pendientes">Pendientes</button>
+            <button data-filtro="completadas">Completadas</button>
+          </div>
+
+          <div class="lista-tareas" id="lista-tareas" role="list">
+            <div class="empty-state">
+              <p>🎯 No hay tareas pendientes. ¡Agrega una para comenzar!</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-pomodoro">
+          <header class="panel-header">
+            <h2>⏱️ Temporizador Pomodoro</h2>
+          </header>
+
+          <div class="temporizador">
+            <div class="circulo-temporizador">
+              <span class="tiempo-restante" id="tiempo-restante">25:00</span>
+            </div>
+
+            <div class="controles-temporizador">
+              <button id="btn-iniciar" class="btn-primario">▶️ Iniciar</button>
+              <button id="btn-pausar" class="btn-secundario" disabled>
+                ⏸️ Pausar
+              </button>
+              <button id="btn-reiniciar" class="btn-secundario">
+                🔄 Reiniciar
+              </button>
+            </div>
+
+            <div class="modo-temporizador">
+              <button class="modo-activo" data-modo="trabajo">
+                Trabajo (25min)
+              </button>
+              <button data-modo="descanso">Descanso (5min)</button>
+            </div>
+          </div>
+
+          <div class="sesiones-completadas">
+            <p>Sesiones completadas hoy: <span id="sesiones-hoy">0</span></p>
+          </div>
+        </section>
+      </div>
+
+      <section class="progreso-semanal">
+        <h2>📈 Progreso Semanal</h2>
+        <div class="grafico-semanal">
+          <div class="barra-dia" data-dia="Lun">
+            <div class="barra-progreso"></div>
+            <span class="etiqueta-dia">Lun</span>
+          </div>
+          <div class="barra-dia" data-dia="Mar">
+            <div class="barra-progreso"></div>
+            <span class="etiqueta-dia">Mar</span>
+          </div>
+          <div class="barra-dia" data-dia="Mie">
+            <div class="barra-progreso"></div>
+            <span class="etiqueta-dia">Mie</span>
+          </div>
+          <div class="barra-dia activo" data-dia="Jue">
+            <div class="barra-progreso"></div>
+            <span class="etiqueta-dia">Jue</span>
+          </div>
+          <div class="barra-dia" data-dia="Vie">
+            <div class="barra-progreso"></div>
+            <span class="etiqueta-dia">Vie</span>
+          </div>
+          <div class="barra-dia" data-dia="Sab">
+            <div class="barra-progreso"></div>
+            <span class="etiqueta-dia">Sab</span>
+          </div>
+          <div class="barra-dia" data-dia="Dom">
+            <div class="barra-progreso"></div>
+            <span class="etiqueta-dia">Dom</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal para agregar tarea -->
+    <div
+      class="modal"
+      id="modal-tarea"
+      role="dialog"
+      aria-labelledby="titulo-modal"
+    >
+      <div class="modal-contenido">
+        <header class="modal-header">
+          <h3 id="titulo-modal">Nueva Tarea</h3>
+          <button
+            class="btn-cerrar"
+            id="btn-cerrar-modal"
+            aria-label="Cerrar modal"
+          >
+            ✕
+          </button>
+        </header>
+
+        <form class="formulario-tarea">
+          <div class="campo-formulario">
+            <label for="titulo-tarea">Título de la tarea</label>
+            <input
+              type="text"
+              id="titulo-tarea"
+              required
+              maxlength="100"
+              placeholder="Ej: Revisar código del proyecto"
+            />
+          </div>
+
+          <div class="campo-formulario">
+            <label for="descripcion-tarea">Descripción (opcional)</label>
+            <textarea
+              id="descripcion-tarea"
+              rows="3"
+              maxlength="250"
+              placeholder="Detalles adicionales de la tarea"
+            ></textarea>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="prioridad-tarea">Prioridad</label>
+            <select id="prioridad-tarea">
+              <option value="baja">Baja</option>
+              <option value="media" selected>Media</option>
+              <option value="alta">Alta</option>
+            </select>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="fecha-limite">Fecha límite (opcional)</label>
+            <input type="date" id="fecha-limite" />
+          </div>
+
+          <div class="acciones-modal">
+            <button type="button" class="btn-secundario" id="btn-cancelar">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primario">Crear Tarea</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

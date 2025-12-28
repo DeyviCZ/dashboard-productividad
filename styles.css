@@ -1,0 +1,357 @@
+/* =======================
+   VARIABLES Y RESET
+======================= */
+:root {
+  --color-primario: #4f46e5;
+  --color-secundario: #6366f1;
+  --color-exito: #22c55e;
+  --color-fondo: #f4f6fb;
+  --color-texto: #1f2937;
+  --color-card: #ffffff;
+  --sombra: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --radio: 14px;
+  --transicion: 0.3s ease;
+}
+
+body.modo-oscuro {
+  --color-fondo: #0f172a;
+  --color-texto: #e5e7eb;
+  --color-card: #1e293b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  min-height: 100vh;
+}
+
+/* =======================
+   HEADER
+======================= */
+.header-principal {
+  background: linear-gradient(
+    135deg,
+    var(--color-primario),
+    var(--color-secundario)
+  );
+  color: #fff;
+  padding: 1.2rem 2rem;
+}
+
+.contenedor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  padding: 0.6rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: var(--transicion);
+}
+
+.btn-toggle:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* =======================
+   CONTENIDO GENERAL
+======================= */
+.contenido-principal {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* =======================
+   ESTADÍSTICAS
+======================= */
+.estadisticas {
+  margin-bottom: 2rem;
+}
+
+.grid-estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.tarjeta-estadistica {
+  background: var(--color-card);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+  box-shadow: var(--sombra);
+  text-align: center;
+}
+
+.numero-estadistica {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-primario);
+}
+
+/* =======================
+   GRID PRINCIPAL
+======================= */
+.grid-principal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .grid-principal {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =======================
+   PANELES
+======================= */
+.panel-tareas,
+.panel-pomodoro {
+  background: var(--color-card);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+  box-shadow: var(--sombra);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* =======================
+   BOTONES
+======================= */
+.btn-primario {
+  background: var(--color-primario);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transicion);
+}
+
+.btn-primario:hover {
+  background: var(--color-secundario);
+}
+
+.btn-secundario {
+  background: transparent;
+  border: 1px solid var(--color-primario);
+  color: var(--color-primario);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-secundario:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =======================
+   FILTROS
+======================= */
+.filtros-tareas {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filtros-tareas button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #e5e7eb;
+}
+
+.filtros-tareas .filtro-activo {
+  background: var(--color-primario);
+  color: #fff;
+}
+
+/* =======================
+   LISTA TAREAS
+======================= */
+#lista-tareas {
+  min-height: 150px;
+}
+
+.empty-state {
+  text-align: center;
+  opacity: 0.7;
+  padding: 2rem 0;
+}
+
+/* =======================
+   POMODORO
+======================= */
+.temporizador {
+  text-align: center;
+}
+
+.circulo-temporizador {
+  width: 160px;
+  height: 160px;
+  margin: 1rem auto;
+  border-radius: 50%;
+  border: 8px solid var(--color-primario);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#tiempo-restante {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.controles-temporizador {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.modo-temporizador button {
+  margin: 0.2rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.modo-activo {
+  background: var(--color-exito);
+  color: #fff;
+}
+
+/* =======================
+   PROGRESO SEMANAL (FIX)
+======================= */
+.progreso-semanal {
+  margin-top: 2rem;
+}
+
+.grafico-semanal {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  height: 200px;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+}
+
+.barra-dia {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.barra-progreso {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: var(--color-primario);
+  border-radius: 6px 6px 0 0;
+  transition: height 0.6s ease;
+}
+
+.barra-dia.activo .barra-progreso {
+  background: var(--color-exito);
+}
+
+.etiqueta-dia {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+}
+
+/* =======================
+   MODAL
+======================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.visible {
+  display: flex;
+}
+
+.modal-contenido {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 420px;
+}
+
+body.modo-oscuro .modal-contenido {
+  background: #020617;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-cerrar {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* =======================
+   FORMULARIOS
+======================= */
+.campo-formulario {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.campo-formulario input,
+.campo-formulario textarea,
+.campo-formulario select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.acciones-modal {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
